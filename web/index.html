@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>CrossOrigin</title>
+</head>
+<body>
+<div>使用注解@CrossOrigin实现跨域</div>
+<pre id="test-response-text"></pre>
+</body>
+<script>
+    function success(text) {
+        var textarea = document.getElementById('test-response-text')
+        textarea.innerText = text
+    }
+    function fail() {
+        var textarea = document.getElementById('test-response-text')
+        textarea.innerText = '还没有跨域，赶快去跨域吧'
+    }
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if (request.readyState === 4) {
+            if (request.status === 200) {
+                return success(request.responseText)
+            } else {
+                return fail()
+            }
+        }else {
+
+        }
+    }
+    console.log(document.getElementById('test-response-text').innerText)
+    request.open('GET','http://localhost:8080/api/users')
+    request.send()
+</script>
+</html>
